@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Job Search Automation Platform — Dashboard (Synthetic Demo)</title>
+<style>
+  :root {
+    --bg: #0b1220;
+    --bg-elevated: #141b2d;
+    --surface-2: #19233a;
+    --surface-3: #202c47;
+    --fg: #e2e8f0;
+    --text-secondary: #aab6cc;
+    --muted: #94a3b8;
+    --muted-dim: #64748b;
+    --border: #243044;
+    --border-soft: rgba(226,232,240,0.08);
+    --header-bg: #101828;
+    --hover-bg: #1b2438;
+    --accent: #38bdf8;
+    --accent-hover: #7dd3fc;
+    --accent-soft: rgba(56,189,248,0.14);
+    --danger: #f87171;
+    --success: #34d399;
+    --success-soft: rgba(52,211,153,0.14);
+    --warning: #fbbf24;
+    --on-accent: #06111f;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.35);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--bg); color: var(--fg); font-size: 14px; -webkit-font-smoothing: antialiased;
+  }
+  .shell { display: flex; min-height: 100vh; }
+  .sidebar {
+    width: 220px; flex: 0 0 220px; background: var(--header-bg); border-right: 1px solid var(--border);
+    position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 16px 12px;
+    display: flex; flex-direction: column;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; padding: 4px 6px 16px; border-bottom: 1px solid var(--border); margin-bottom: 12px; }
+  .brand-mark { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg, var(--accent), var(--accent-hover)); display:flex; align-items:center; justify-content:center; font-weight:800; color: var(--on-accent); font-size:14px; flex:none; }
+  .brand-text { line-height: 1.15; }
+  .brand-name { font-size: 0.86rem; font-weight: 700; }
+  .brand-sub { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+  .nav-group { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+  .nav-link { display:flex; align-items:center; gap:10px; color: var(--text-secondary); text-decoration:none; font-size:0.85rem; font-weight:500; padding:7px 10px; border-radius:8px; }
+  .nav-link .dot { width:14px; text-align:center; opacity:0.8; }
+  .nav-link:hover { background: var(--hover-bg); color: var(--fg); }
+  .nav-link.active { background: var(--accent); color: var(--on-accent); font-weight:700; }
+  .sidebar-footer { border-top: 1px solid var(--border); padding-top: 10px; margin-top: 10px; }
+  .demo-flag { display:flex; align-items:center; gap:6px; font-size:0.66rem; color: var(--warning); border: 1px dashed rgba(251,191,36,0.5); border-radius: 6px; padding: 5px 8px; }
+
+  .content { flex: 1; padding: 20px 28px 48px; min-width: 0; }
+  .topbar { display:flex; justify-content: space-between; align-items:flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .topbar h1 { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em; margin: 0; }
+  .topbar-meta { display:flex; align-items:center; gap:10px; margin-top:5px; font-size:0.78rem; color: var(--muted); flex-wrap: wrap; }
+  .status-pill { display:inline-flex; align-items:center; gap:6px; font-size:0.72rem; color:var(--muted); padding:5px 10px; border-radius:999px; background: var(--surface-2); white-space: nowrap; }
+  .status-dot { width:7px; height:7px; border-radius:50%; background: var(--muted-dim); }
+  .status-pill[data-state="idle"] .status-dot { background: var(--warning); }
+  .status-pill[data-state="running"] .status-dot { background: var(--success); box-shadow: 0 0 0 3px var(--success-soft); }
+  .status-pill[data-state="ok"] .status-dot { background: var(--success); }
+  .synthetic-badge { display:inline-flex; align-items:center; gap:6px; font-size:0.68rem; font-weight:700; letter-spacing:0.04em; color: var(--warning); background: rgba(251,191,36,0.1); border: 1px dashed rgba(251,191,36,0.5); border-radius: 999px; padding: 5px 12px; text-transform: uppercase; }
+
+  h2 { font-size: 0.92rem; font-weight: 700; letter-spacing: -0.005em; margin: 0 0 12px; }
+  section.panel { margin-bottom: 34px; scroll-margin-top: 16px; }
+  .card { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px; box-shadow: var(--shadow-sm); }
+  .grid { display: grid; gap: 14px; }
+
+  .kpi-row { display:grid; grid-template-columns: repeat(5, minmax(150px,1fr)); gap: 12px; }
+  .kpi-card { position: relative; background: var(--bg-elevated); border:1px solid var(--border); border-radius: var(--radius-md); padding: 12px 14px; overflow:hidden; }
+  .kpi-card::before { content:""; position:absolute; top:0; left:0; width:3px; height:100%; background: var(--accent); opacity:0.8; }
+  .kpi-card[data-kpi="manual-review"]::before { background: #0ea5e9; }
+  .kpi-card[data-kpi="pending"]::before { background: var(--warning); }
+  .kpi-label { color: var(--muted); font-size:0.64rem; text-transform: uppercase; letter-spacing:0.05em; }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; margin-top: 4px; }
+  .kpi-value small { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
+  .kpi-caption { font-size: 0.72rem; color: var(--muted); margin-top: 6px; }
+
+  table { border-collapse: collapse; width:100%; background: var(--bg-elevated); }
+  .table-wrap { border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+  th { background: var(--header-bg); text-align:left; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.04em; color: var(--muted); font-weight:700; padding: 9px 12px; white-space: nowrap; }
+  td { padding: 9px 12px; font-size: 0.82rem; border-top: 1px solid var(--border-soft); }
+  tbody tr:nth-child(even) { background: var(--surface-2); }
+  tbody tr:hover td { background: var(--hover-bg); }
+
+  .badge { display:inline-flex; align-items:center; gap:6px; color:white; padding:3px 10px 3px 8px; border-radius:999px; font-size:0.7rem; font-weight:700; white-space: nowrap; }
+  .badge::before { content:""; width:6px; height:6px; border-radius:50%; background: rgba(255,255,255,0.85); }
+  .fit-tier { display:inline-block; padding: 3px 9px; border-radius:999px; font-size:0.7rem; font-weight:700; }
+  .fit-tier[data-tier="strong"] { background: var(--success); color:#06210f; }
+  .fit-tier[data-tier="good"] { background: var(--accent); color:#06111f; }
+  .fit-tier[data-tier="moderate"] { background: var(--warning); color:#251a00; }
+  .fit-tier[data-tier="weak"] { background:#b45309; color:white; }
+  .reason-pill { display:inline-flex; align-items:center; gap:6px; font-size:0.72rem; padding:4px 10px; border-radius:999px; background: var(--surface-2); color: var(--text-secondary); border: 1px solid var(--border); }
+  .btn-ghost { display:inline-block; padding:6px 14px; border-radius:8px; background: var(--surface-3); color: var(--muted); font-size:0.75rem; font-weight:700; cursor:not-allowed; opacity:0.8; border: 1px solid var(--border); }
+
+  .row-2 { display:grid; grid-template-columns: 1.3fr 1fr; gap: 14px; }
+  .row-3 { display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 1100px) { .row-2, .row-3 { grid-template-columns: 1fr; } .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+
+  .funnel { display:flex; flex-direction:column; gap:10px; }
+  .funnel-row { display:grid; grid-template-columns: 140px 1fr 46px; align-items:center; gap:10px; font-size:0.8rem; }
+  .funnel-track { height:14px; border-radius:5px; background: var(--surface-2); overflow:hidden; }
+  .funnel-fill { height:100%; border-radius:5px; background: linear-gradient(90deg, var(--accent), var(--accent-hover)); }
+
+  .activity-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0; }
+  .activity-list li { display:flex; gap:12px; padding: 10px 0; border-top: 1px solid var(--border-soft); font-size:0.82rem; }
+  .activity-list li:first-child { border-top: none; }
+  .activity-time { color: var(--muted); font-variant-numeric: tabular-nums; white-space:nowrap; font-size:0.76rem; padding-top:1px; }
+  .activity-dot { width:8px; height:8px; border-radius:50%; margin-top:5px; flex:none; }
+
+  .donut-wrap { display:flex; align-items:center; gap: 22px; flex-wrap: wrap; }
+  .donut-legend { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; font-size:0.78rem; }
+  .donut-legend li { display:flex; align-items:center; gap:8px; }
+  .legend-dot { width:9px; height:9px; border-radius:50%; flex:none; }
+
+  .bar-row { display:grid; grid-template-columns: 150px 1fr 34px; align-items:center; gap:10px; font-size:0.78rem; margin-bottom:9px; }
+  .bar-track { height:10px; border-radius:5px; background: var(--surface-2); }
+  .bar-fill { height:100%; border-radius:5px; }
+
+  .week-chart { display:flex; align-items:flex-end; gap:12px; height:140px; padding-top: 10px; position:relative; }
+  .week-col { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; gap:6px; }
+  .week-bar { width:100%; max-width:34px; border-radius: 5px 5px 0 0; background: linear-gradient(180deg, var(--accent-hover), var(--accent)); }
+  .week-label { font-size:0.68rem; color: var(--muted); }
+  .week-val { font-size:0.7rem; color: var(--fg); font-weight:600; }
+  .target-line { position:absolute; left:0; right:0; border-top: 1px dashed var(--warning); }
+
+  .health-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(190px,1fr)); gap: 12px; }
+  .health-item { display:flex; justify-content:space-between; align-items:center; background: var(--surface-2); border-radius: var(--radius-sm); padding: 10px 12px; }
+  .health-name { font-size:0.78rem; color: var(--text-secondary); }
+
+  footer.foot-note { margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 0.72rem; color: var(--muted-dim); }
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">J</div>
+      <div class="brand-text">
+        <div class="brand-name">AI Job Search</div>
+        <div class="brand-sub">Automation Platform</div>
+      </div>
+    </div>
+    <nav class="nav-group">
+      <a class="nav-link active" href="#overview"><span class="dot">◆</span> Overview</a>
+      <a class="nav-link" href="#discovery"><span class="dot">▤</span> Discovery &amp; Ranking</a>
+      <a class="nav-link" href="#pipeline"><span class="dot">➤</span> Pipeline &amp; Status</a>
+      <a class="nav-link" href="#manual-review"><span class="dot">✎</span> Manual Review</a>
+      <a class="nav-link" href="#activity"><span class="dot">▧</span> Recent Activity</a>
+      <a class="nav-link" href="#analytics"><span class="dot">▣</span> Analytics</a>
+      <a class="nav-link" href="#health"><span class="dot">⚙</span> System Health</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="demo-flag">⚠ Synthetic demo data</div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="topbar">
+      <div>
+        <h1>Operations Dashboard</h1>
+        <div class="topbar-meta">
+          <span>As of Sat, Demo Date · 11:20 (illustrative)</span>
+          <span class="status-pill" data-state="idle"><span class="status-dot"></span> Pipeline: idle — next run on schedule</span>
+        </div>
+      </div>
+      <span class="synthetic-badge">⚠ Synthetic demo data — no real applications</span>
+    </header>
+
+    <section class="panel" id="overview">
+      <h2>Overview</h2>
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Applications this week</div>
+          <div class="kpi-value">6 <small>/ 10 target</small></div>
+          <div class="kpi-caption">On pace for the weekly goal</div>
+        </div>
+        <div class="kpi-card" data-kpi="manual-review">
+          <div class="kpi-label">Manual review queue</div>
+          <div class="kpi-value">4</div>
+          <div class="kpi-caption">Awaiting human completion</div>
+        </div>
+        <div class="kpi-card" data-kpi="pending">
+          <div class="kpi-label">Active backlog</div>
+          <div class="kpi-value">12</div>
+          <div class="kpi-caption">Discovered, not yet resolved</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Submitted (automated)</div>
+          <div class="kpi-value">9</div>
+          <div class="kpi-caption">Cleared every safety gate</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Total tracked</div>
+          <div class="kpi-value">128</div>
+          <div class="kpi-caption">All-time, this demo dataset</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="discovery">
+      <h2>Discovery &amp; Ranking</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Company</th><th>Role</th><th>Source</th><th>Discovered</th><th>Fit</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Northgate Analytics</td><td>SOC Analyst I</td><td>Public job board</td><td>Demo Day −1</td><td><span class="fit-tier" data-tier="strong">Strong</span></td><td><span class="badge" style="background:#3b82f6">ranked</span></td></tr>
+            <tr><td>Cobalt Ridge Security</td><td>IT Security Analyst</td><td>Company careers page</td><td>Demo Day −1</td><td><span class="fit-tier" data-tier="good">Good</span></td><td><span class="badge" style="background:#64748b">drafted</span></td></tr>
+            <tr><td>Meridian Cloud Systems</td><td>Cloud Support Engineer</td><td>Public job board</td><td>Demo Day −2</td><td><span class="fit-tier" data-tier="good">Good</span></td><td><span class="badge" style="background:#0ea5e9">manual_submit_ready</span></td></tr>
+            <tr><td>Lumen Bridge Technologies</td><td>Junior DevOps Engineer</td><td>Aggregator API</td><td>Demo Day −2</td><td><span class="fit-tier" data-tier="moderate">Moderate</span></td><td><span class="badge" style="background:#3b82f6">ranked</span></td></tr>
+            <tr><td>Vantage Point Networks</td><td>Network Security Analyst</td><td>Company careers page</td><td>Demo Day −3</td><td><span class="fit-tier" data-tier="strong">Strong</span></td><td><span class="badge" style="background:#22c55e">applied</span></td></tr>
+            <tr><td>BrightPath Digital</td><td>Vulnerability Mgmt Analyst</td><td>Public job board</td><td>Demo Day −3</td><td><span class="fit-tier" data-tier="weak">Weak</span></td><td><span class="badge" style="background:#475569">expired</span></td></tr>
+            <tr><td>Solace Grid Security</td><td>Security Operations Analyst</td><td>Aggregator API</td><td>Demo Day −4</td><td><span class="fit-tier" data-tier="good">Good</span></td><td><span class="badge" style="background:#64748b">drafted</span></td></tr>
+            <tr><td>Anchorwell Systems</td><td>Systems Administrator</td><td>Public job board</td><td>Demo Day −4</td><td><span class="fit-tier" data-tier="moderate">Moderate</span></td><td><span class="badge" style="background:#94a3b8">gate_failed</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="pipeline">
+      <h2>Pipeline &amp; Status</h2>
+      <div class="card">
+        <div class="funnel">
+          <div class="funnel-row"><span>Drafted</span><div class="funnel-track"><div class="funnel-fill" style="width:100%"></div></div><span>34</span></div>
+          <div class="funnel-row"><span>Manual review</span><div class="funnel-track"><div class="funnel-fill" style="width:47%"></div></div><span>4</span></div>
+          <div class="funnel-row"><span>Submitted</span><div class="funnel-track"><div class="funnel-fill" style="width:76%"></div></div><span>26</span></div>
+          <div class="funnel-row"><span>Interview</span><div class="funnel-track"><div class="funnel-fill" style="width:24%"></div></div><span>6</span></div>
+          <div class="funnel-row"><span>Offer</span><div class="funnel-track"><div class="funnel-fill" style="width:8%"></div></div><span>1</span></div>
+          <div class="funnel-row"><span>Rejected / expired</span><div class="funnel-track"><div class="funnel-fill" style="width:38%"></div></div><span>13</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="manual-review">
+      <h2>Manual Review — Human Authority at Consequential Boundaries</h2>
+      <p style="color:var(--muted); font-size:0.82rem; margin-top:-4px;">Items below cleared every stage up to submission, then a deterministic gate deliberately stopped automated progress. Materials are fully prepared; a human completes the last step.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Company</th><th>Role</th><th>Flagged reason</th><th>Materials</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td>Cobalt Ridge Security</td><td>IT Security Analyst</td><td><span class="reason-pill">⚠ CAPTCHA detected</span></td><td>CV + cover letter ready</td><td><span class="btn-ghost">Review &amp; complete</span></td></tr>
+            <tr><td>Meridian Cloud Systems</td><td>Cloud Support Engineer</td><td><span class="reason-pill">⚠ Security question</span></td><td>CV + cover letter ready</td><td><span class="btn-ghost">Review &amp; complete</span></td></tr>
+            <tr><td>Solace Grid Security</td><td>Security Operations Analyst</td><td><span class="reason-pill">⚠ Incomplete required field</span></td><td>CV + cover letter ready</td><td><span class="btn-ghost">Review &amp; complete</span></td></tr>
+            <tr><td>Lumen Bridge Technologies</td><td>Junior DevOps Engineer</td><td><span class="reason-pill">⚠ Ambiguous free-text question</span></td><td>CV + cover letter ready</td><td><span class="btn-ghost">Review &amp; complete</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="activity">
+      <h2>Recent Activity</h2>
+      <div class="card">
+        <ul class="activity-list">
+          <li><span class="activity-dot" style="background:var(--accent)"></span><span class="activity-time">14:52</span><span>Discovery run completed — 11 new postings found, 7 unique after dedup</span></li>
+          <li><span class="activity-dot" style="background:var(--warning)"></span><span class="activity-time">14:41</span><span>Deterministic gates excluded 3 postings (seniority/title filter)</span></li>
+          <li><span class="activity-dot" style="background:var(--accent)"></span><span class="activity-time">13:58</span><span>Ranked 4 postings — primary AI provider, 0 fallbacks needed</span></li>
+          <li><span class="activity-dot" style="background:var(--success)"></span><span class="activity-time">13:22</span><span>Application drafted for Northgate Analytics — SOC Analyst I</span></li>
+          <li><span class="activity-dot" style="background:var(--accent)"></span><span class="activity-time">13:05</span><span>Reviewer critique completed — 1 revision applied before assembly</span></li>
+          <li><span class="activity-dot" style="background:var(--danger)"></span><span class="activity-time">12:47</span><span>Flagged for manual review: CAPTCHA detected — Cobalt Ridge Security</span></li>
+          <li><span class="activity-dot" style="background:var(--success)"></span><span class="activity-time">11:30</span><span>Application submitted via browser automation — Vantage Point Networks</span></li>
+          <li><span class="activity-dot" style="background:var(--muted-dim)"></span><span class="activity-time">09:15</span><span>Scheduled pipeline run started</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel" id="analytics">
+      <h2>Analytics</h2>
+      <div class="row-2" style="margin-bottom:14px;">
+        <div class="card">
+          <div style="font-size:0.8rem; color:var(--muted); margin-bottom:10px; font-weight:600;">Outcome mix (all-time, this demo dataset)</div>
+          <div class="donut-wrap">
+            <svg width="128" height="128" viewBox="0 0 128 128" aria-hidden="true">
+              <circle cx="64" cy="64" r="46" fill="none" stroke="var(--surface-2)" stroke-width="20"/>
+              <circle cx="64" cy="64" r="46" fill="none" stroke="var(--success)" stroke-width="20"
+                stroke-dasharray="129 160" stroke-dashoffset="0" transform="rotate(-90 64 64)"/>
+              <circle cx="64" cy="64" r="46" fill="none" stroke="#0ea5e9" stroke-width="20"
+                stroke-dasharray="30 160" stroke-dashoffset="-129" transform="rotate(-90 64 64)"/>
+              <circle cx="64" cy="64" r="46" fill="none" stroke="var(--muted-dim)" stroke-width="20"
+                stroke-dasharray="46 160" stroke-dashoffset="-159" transform="rotate(-90 64 64)"/>
+              <circle cx="64" cy="64" r="46" fill="none" stroke="var(--danger)" stroke-width="20"
+                stroke-dasharray="25 160" stroke-dashoffset="-205" transform="rotate(-90 64 64)"/>
+              <text x="64" y="60" text-anchor="middle" font-size="20" font-weight="700" fill="var(--fg)">128</text>
+              <text x="64" y="76" text-anchor="middle" font-size="9" fill="var(--muted)">TOTAL</text>
+            </svg>
+            <ul class="donut-legend">
+              <li><span class="legend-dot" style="background:var(--success)"></span> Applied — 46 (36%)</li>
+              <li><span class="legend-dot" style="background:#0ea5e9"></span> Manual review — 11 (9%)</li>
+              <li><span class="legend-dot" style="background:var(--muted-dim)"></span> Expired — 16 (13%)</li>
+              <li><span class="legend-dot" style="background:var(--danger)"></span> Not proceeding — 9 (7%)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.8rem; color:var(--muted); margin-bottom:10px; font-weight:600;">Applications this week vs. target</div>
+          <div class="week-chart">
+            <div class="target-line" style="bottom:70%;"></div>
+            <div class="week-col"><div class="week-val">1</div><div class="week-bar" style="height:14%;"></div><div class="week-label">Mon</div></div>
+            <div class="week-col"><div class="week-val">2</div><div class="week-bar" style="height:28%;"></div><div class="week-label">Tue</div></div>
+            <div class="week-col"><div class="week-val">0</div><div class="week-bar" style="height:2%;"></div><div class="week-label">Wed</div></div>
+            <div class="week-col"><div class="week-val">1</div><div class="week-bar" style="height:14%;"></div><div class="week-label">Thu</div></div>
+            <div class="week-col"><div class="week-val">2</div><div class="week-bar" style="height:28%;"></div><div class="week-label">Fri</div></div>
+            <div class="week-col"><div class="week-val">0</div><div class="week-bar" style="height:2%;"></div><div class="week-label">Sat</div></div>
+            <div class="week-col"><div class="week-val">0</div><div class="week-bar" style="height:2%;"></div><div class="week-label">Sun</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:0.8rem; color:var(--muted); margin-bottom:10px; font-weight:600;">Top sources (this demo dataset)</div>
+        <div class="bar-row"><span>Public job board</span><div class="bar-track"><div class="bar-fill" style="width:82%; background:var(--series-1, #3987e5)"></div></div><span>58</span></div>
+        <div class="bar-row"><span>Company careers page</span><div class="bar-track"><div class="bar-fill" style="width:56%; background:#d95926"></div></div><span>40</span></div>
+        <div class="bar-row"><span>Aggregator API</span><div class="bar-track"><div class="bar-fill" style="width:42%; background:#199e70"></div></div><span>30</span></div>
+      </div>
+    </section>
+
+    <section class="panel" id="health">
+      <h2>System Health</h2>
+      <div class="row-3">
+        <div class="card">
+          <div style="font-size:0.8rem; color:var(--muted); margin-bottom:10px; font-weight:600;">Services</div>
+          <div class="health-grid">
+            <div class="health-item"><span class="health-name">Pipeline service</span><span class="status-pill" data-state="idle"><span class="status-dot"></span> idle</span></div>
+            <div class="health-item"><span class="health-name">Dashboard service</span><span class="status-pill" data-state="running"><span class="status-dot"></span> running</span></div>
+            <div class="health-item"><span class="health-name">Credential store</span><span class="status-pill" data-state="ok"><span class="status-dot"></span> sealed / ok</span></div>
+            <div class="health-item"><span class="health-name">Last run</span><span style="font-size:0.76rem; color:var(--muted);">Demo Day −1, 16:45</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.8rem; color:var(--muted); margin-bottom:10px; font-weight:600;">AI provider fallback log (sample)</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Item</th><th>Provider</th><th>Result</th></tr></thead>
+              <tbody>
+                <tr><td>Job #114</td><td>Primary</td><td><span class="badge" style="background:var(--success)">success</span></td></tr>
+                <tr><td>Job #115</td><td>Primary</td><td><span class="badge" style="background:var(--danger)">failed</span></td></tr>
+                <tr><td>Job #115</td><td>Secondary (fallback)</td><td><span class="badge" style="background:var(--success)">success</span></td></tr>
+                <tr><td>Job #116</td><td>Primary</td><td><span class="badge" style="background:var(--success)">success</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.8rem; color:var(--muted); margin-bottom:10px; font-weight:600;">Automated test suite</div>
+          <div class="kpi-value" style="margin-top:2px;">2,286 <small>passing</small></div>
+          <div class="kpi-caption">8 skipped (environment-dependent) · 143 subtests passing · 2 environment-dependent failures</div>
+          <div class="kpi-caption" style="margin-top:8px;">See <code style="background:var(--surface-2); padding:1px 5px; border-radius:4px;">docs/testing.md</code> for the exact, unrounded numbers.</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot-note">
+      Every figure on this page is fabricated for demonstration purposes. Company names, roles, dates, and activity are fictional and do not represent any real job posting, employer, or application. The System Health test-suite figure is the one real, audited number on this page — see <code>docs/testing.md</code>. This file has no backend: it is a static snapshot, not a live application.
+    </footer>
+  </main>
+</div>
+</body>
+</html>

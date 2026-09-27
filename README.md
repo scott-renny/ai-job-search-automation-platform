@@ -59,7 +59,7 @@ Real incidents shaped real design changes: a background pipeline run killed by i
 | [`docs/grounded-generation.md`](docs/grounded-generation.md) | How AI-assisted document generation stays truthful, and its real limits |
 | [`docs/engineering-stories.md`](docs/engineering-stories.md) | Eight sanitized real-incident deep dives |
 | [`docs/portfolio-case-study.md`](docs/portfolio-case-study.md) | Long-form case study: problem, evolution, architecture, decisions, lessons |
-| [`demo/README.md`](demo/README.md) | Plan for a synthetic-data dashboard demo (no real data) |
+| [`demo/README.md`](demo/README.md) | Synthetic-data dashboard demo, with screenshots (no real data) |
 
 ## Provenance & what this repository is
 

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1513" viewBox="0 0 900 1513">
+<defs>
+  <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+    <path d="M0,0 L8,4 L0,8 Z" fill="#94a3b8"/>
+  </marker>
+</defs>
+<rect x="0" y="0" width="900" height="1513" fill="#0b1220"/>
+<text x="450.0" y="46" font-family="Segoe UI, -apple-system, sans-serif" font-size="21" font-weight="700" fill="#e2e8f0" text-anchor="middle">AI Job Search Automation Platform</text>
+<text x="450.0" y="68" font-family="Segoe UI, -apple-system, sans-serif" font-size="12.5" font-weight="500" fill="#94a3b8" text-anchor="middle">System Architecture — conceptual, sanitized (no infrastructure specifics)</text>
+<rect x="170.0" y="96.0" width="560.0" height="56.0" rx="10" fill="#141b2d" stroke="#243044" stroke-width="1.2"/>
+<rect x="170.0" y="96.0" width="5" height="56.0" rx="2.5" fill="#7c8aa5"/>
+<text x="456.0" y="129.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="14.5" font-weight="600" fill="#e2e8f0" text-anchor="middle">Job Sources</text>
+<rect x="170.0" y="188.0" width="560.0" height="56.0" rx="10" fill="#141b2d" stroke="#243044" stroke-width="1.2"/>
+<rect x="170.0" y="188.0" width="5" height="56.0" rx="2.5" fill="#7c8aa5"/>
+<text x="456.0" y="221.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="14.5" font-weight="600" fill="#e2e8f0" text-anchor="middle">Discovery</text>
+<rect x="170.0" y="280.0" width="560.0" height="56.0" rx="10" fill="#141b2d" stroke="#243044" stroke-width="1.2"/>
+<rect x="170.0" y="280.0" width="5" height="56.0" rx="2.5" fill="#fbbf24"/>
+<text x="456.0" y="313.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="14.5" font-weight="600" fill="#e2e8f0" text-anchor="middle">Deduplication</text>
+<rect x="170.0" y="372.0" width="560.0" height="56.0" rx="10" fill="#141b2d" stroke="#243044" stroke-width="1.2"/>
+<rect x="170.0" y="372.0" width="5" height="56.0" rx="2.5" fill="#fbbf24"/>
+<text x="456.0" y="405.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="14.5" font-weight="600" fill="#e2e8f0" text-anchor="middle">Deterministic Eligibility Gates</text>
+<rect x="170.0" y="464.0" width="560.0" height="56.0" rx="10" fill="#141b2d" stroke="#243044" stroke-width="1.2"/>
+<rect x="170.0" y="464.0" width="5" height="56.0" rx="2.5" fill="#38bdf8"/>
+<text x="456.0" y="497.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="14.5" font-weight="600" fill="#e2e8f0" text-anchor="middle">AI-Assisted Ranking</text>
+<rect x="170.0" y="556.0" width="560.0" height="56.0" rx="10" fill="#141b2d" stroke="#243044" stroke-width="1.2"/>
+<rect x="170.0" y="556.0" width="5" height="56.0" rx="2.5" fill="#38bdf8"/>
+<text x="456.0" y="589.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="14.5" font-weight="600" fill="#e2e8f0" text-anchor="middle">Grounded Document Generation</text>
+<rect x="170.0" y="648.0" width="560.0" height="56.0" rx="10" fill="#141b2d" stroke="#243044" stroke-width="1.2"/>
+<rect x="170.0" y="648.0" width="5" height="56.0" rx="2.5" fill="#38bdf8"/>
+<text x="456.0" y="681.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="14.5" font-weight="600" fill="#e2e8f0" text-anchor="middle">Reviewer Critique</text>
+<rect x="170.0" y="740.0" width="560.0" height="56.0" rx="10" fill="#141b2d" stroke="#243044" stroke-width="1.2"/>
+<rect x="170.0" y="740.0" width="5" height="56.0" rx="2.5" fill="#fbbf24"/>
+<text x="456.0" y="773.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="14.5" font-weight="600" fill="#e2e8f0" text-anchor="middle">Document Assembly &amp; Validation</text>
+<rect x="170.0" y="832.0" width="560.0" height="56.0" rx="10" fill="#141b2d" stroke="#243044" stroke-width="1.2"/>
+<rect x="170.0" y="832.0" width="5" height="56.0" rx="2.5" fill="#fbbf24"/>
+<text x="456.0" y="865.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="14.5" font-weight="600" fill="#e2e8f0" text-anchor="middle">Submission Safety Gates</text>
+<line x1="450.0" y1="152.0" x2="450.0" y2="188.0" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="450.0" y1="244.0" x2="450.0" y2="280.0" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="450.0" y1="336.0" x2="450.0" y2="372.0" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="450.0" y1="428.0" x2="450.0" y2="464.0" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="450.0" y1="520.0" x2="450.0" y2="556.0" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="450.0" y1="612.0" x2="450.0" y2="648.0" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="450.0" y1="704.0" x2="450.0" y2="740.0" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="450.0" y1="796.0" x2="450.0" y2="832.0" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="450.0" y1="888.0" x2="450.0" y2="909.0" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<polygon points="450.0,909.0 620.0,944.0 450.0,979.0 280.0,944.0" fill="#141b2d" stroke="#243044" stroke-width="1.4"/>
+<text x="450.0" y="938.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="13.5" font-weight="700" fill="#e2e8f0" text-anchor="middle">All gates</text>
+<text x="450.0" y="956.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="13.5" font-weight="700" fill="#e2e8f0" text-anchor="middle">satisfied?</text>
+<rect x="20.0" y="1035.0" width="250.0" height="56.0" rx="10" fill="#141b2d" stroke="#243044" stroke-width="1.2"/>
+<rect x="20.0" y="1035.0" width="5" height="56.0" rx="2.5" fill="#34d399"/>
+<text x="145.0" y="1068.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="14.5" font-weight="600" fill="#e2e8f0" text-anchor="middle">Human Review</text>
+<rect x="630.0" y="1035.0" width="250.0" height="56.0" rx="10" fill="#141b2d" stroke="#243044" stroke-width="1.2"/>
+<rect x="630.0" y="1035.0" width="5" height="56.0" rx="2.5" fill="#38bdf8"/>
+<text x="755.0" y="1068.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="14.5" font-weight="600" fill="#e2e8f0" text-anchor="middle">Browser Automation</text>
+<path d="M 280.0 944.0 L 145.0 1035.0" stroke="#94a3b8" stroke-width="1.6" fill="none" marker-end="url(#arrow)"/>
+<path d="M 620.0 944.0 L 755.0 1035.0" stroke="#94a3b8" stroke-width="1.6" fill="none" marker-end="url(#arrow)"/>
+<text x="246.0" y="934.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="11.5" font-weight="600" fill="#94a3b8" text-anchor="middle">No / uncertain</text>
+<text x="650.0" y="934.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="11.5" font-weight="600" fill="#94a3b8" text-anchor="middle">Yes</text>
+<rect x="170.0" y="1147.0" width="560.0" height="56.0" rx="10" fill="#141b2d" stroke="#243044" stroke-width="1.2"/>
+<rect x="170.0" y="1147.0" width="5" height="56.0" rx="2.5" fill="#7c8aa5"/>
+<text x="450.0" y="1180.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="14.5" font-weight="600" fill="#e2e8f0" text-anchor="middle">Application Tracking</text>
+<path d="M 145.0 1091.0 L 145.0 1175.0 L 170.0 1175.0" stroke="#94a3b8" stroke-width="1.6" fill="none" marker-end="url(#arrow)"/>
+<path d="M 755.0 1091.0 L 755.0 1175.0 L 730.0 1175.0" stroke="#94a3b8" stroke-width="1.6" fill="none" marker-end="url(#arrow)"/>
+<rect x="170.0" y="1239.0" width="560.0" height="56.0" rx="10" fill="#141b2d" stroke="#243044" stroke-width="1.2"/>
+<rect x="170.0" y="1239.0" width="5" height="56.0" rx="2.5" fill="#7c8aa5"/>
+<text x="450.0" y="1272.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="14.5" font-weight="600" fill="#e2e8f0" text-anchor="middle">Dashboard / Analytics / Reporting</text>
+<line x1="450.0" y1="1203.0" x2="450.0" y2="1239.0" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrow)"/>
+<line x1="60" y1="1335.0" x2="840" y2="1335.0" stroke="#243044" stroke-width="1"/>
+<text x="450.0" y="1355.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="11.5" font-weight="700" fill="#94a3b8" text-anchor="middle">SUPPORTING SYSTEMS</text>
+<text x="450.0" y="1371.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="10" font-weight="400" fill="#94a3b8" text-anchor="middle">(underpin discovery, ranking, generation, and submission throughout the pipeline above)</text>
+<rect x="40.0" y="1387.0" width="148.0" height="56.0" rx="8" fill="#101828" stroke="#2b3a56" stroke-width="1.2"/>
+<text x="114.0" y="1409.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">Checkpointed</text>
+<text x="114.0" y="1424.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">State</text>
+<rect x="208.0" y="1387.0" width="148.0" height="56.0" rx="8" fill="#101828" stroke="#2b3a56" stroke-width="1.2"/>
+<text x="282.0" y="1409.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">Provider</text>
+<text x="282.0" y="1424.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">Fallback</text>
+<rect x="376.0" y="1387.0" width="148.0" height="56.0" rx="8" fill="#101828" stroke="#2b3a56" stroke-width="1.2"/>
+<text x="450.0" y="1409.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">Credential</text>
+<text x="450.0" y="1424.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">Boundary</text>
+<rect x="544.0" y="1387.0" width="148.0" height="56.0" rx="8" fill="#101828" stroke="#2b3a56" stroke-width="1.2"/>
+<text x="618.0" y="1409.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">Service</text>
+<text x="618.0" y="1424.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">Execution</text>
+<rect x="712.0" y="1387.0" width="148.0" height="56.0" rx="8" fill="#101828" stroke="#2b3a56" stroke-width="1.2"/>
+<text x="786.0" y="1415.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">Observability</text>
+<rect x="70.0" y="1466.0" width="14" height="14" rx="3" fill="#fbbf24"/>
+<text x="92.0" y="1477.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#94a3b8" text-anchor="start">Deterministic rule</text>
+<rect x="240.0" y="1466.0" width="14" height="14" rx="3" fill="#38bdf8"/>
+<text x="262.0" y="1477.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#94a3b8" text-anchor="start">AI-assisted</text>
+<rect x="361.0" y="1466.0" width="14" height="14" rx="3" fill="#34d399"/>
+<text x="383.0" y="1477.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#94a3b8" text-anchor="start">Human-in-the-loop</text>
+<rect x="524.0" y="1466.0" width="14" height="14" rx="3" fill="#7c8aa5"/>
+<text x="546.0" y="1477.0" font-family="Segoe UI, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#94a3b8" text-anchor="start">Pipeline stage</text>
+</svg>
