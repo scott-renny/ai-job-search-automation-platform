@@ -12,7 +12,7 @@ That original framework provided a manually-driven, interactive workflow for eva
 
 Actively job searching well takes real, repeated effort: finding relevant postings across scattered sources, evaluating fit honestly, producing a genuinely tailored (not generic) application for each one, tracking status across dozens of open threads, and doing all of it consistently over weeks or months. Doing this manually doesn't scale, and doing it with a fragile personal script trades one set of problems for another — silent failures, lost work, and no real safety net around the one action that actually matters: submitting something on my behalf.
 
-I wanted to apply real production-engineering discipline to this problem, not a one-off automation script — and to do it in a way that could never fabricate anything about my own experience.
+I wanted to apply real production-engineering discipline to this problem, not a one-off automation script — with document generation explicitly constrained to my own verified candidate information and checked by an independent reviewer pass before anything is finalized, rather than left to an unconstrained model.
 
 ## Evolution
 
