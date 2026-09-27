@@ -1,0 +1,20 @@
+# Never let anything derived from the production system land in this repo.
+*.env
+.env.*
+*credential*
+*secret*
+*token*
+*.pem
+*.key
+
+# Local scratch / OS noise
+.DS_Store
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+
+# Placeholder for future generated demo assets (see demo/README.md) -
+# real screenshots/video should be reviewed before being committed, not
+# auto-included by a broad glob.
+demo/generated/
