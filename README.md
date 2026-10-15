@@ -1,4 +1,18 @@
+<div align="center">
+
 # AI Job Search Automation Platform
+### Workflow Engineering · Security Gates · Operational Evidence
+
+![edition: documentation showcase](https://img.shields.io/badge/edition-documentation%20showcase-22d3ee?style=flat-square)
+![data: synthetic demo](https://img.shields.io/badge/data-synthetic%20demo-2563eb?style=flat-square)
+
+[Architecture](docs/architecture.md) · [License](LICENSE)
+
+</div>
+
+[What this is](#what-this-is) · [The dashboard](#the-dashboard) · [Key capabilities](#key-capabilities) · [Architecture](#architecture) · [Engineering highlights](#engineering-highlights) · [Security & responsible AI](#security--responsible-ai)
+
+---
 
 **Engineering a reliable, security-conscious AI workflow for real-world job-search automation**
 
